@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Video Data - App 2</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+        th {
+            background-color: #f4f4f4;
+        }
+    </style>
+</head>
+<body>
+    <h1>Video Data - App 2</h1>
+    <table id="videoTable">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Title</th>
+                <th>Views</th>
+                <th>Likes</th>
+                <th>Dislikes</th>
+                <th>Comments</th>
+                <th>Published At</th>
+            </tr>
+        </thead>
+        <tbody></tbody>
+    </table>
+
+    <script>
+        // Fetch and display the video data
+        async function fetchVideos() {
+            const response = await fetch('/api/videos');
+            const data = await response.json();
+            const tableBody = document.querySelector('#videoTable tbody');
+            
+            data.forEach(video => {
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td>${video[0]}</td>
+                    <td>${video[1]}</td>
+                    <td>${video[2]}</td>
+                    <td>${video[3]}</td>
+                    <td>${video[4]}</td>
+                    <td>${video[5]}</td>
+                    <td>${video[6]}</td>
+                `;
+                tableBody.appendChild(row);
+            });
+        }
+
+        // Load the video data when the page loads
+        fetchVideos();
+    </script>
+</body>
+</html>
